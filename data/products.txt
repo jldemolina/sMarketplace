@@ -1,6 +1,6 @@
-S1 | Pepe | pepe@gmail.com | PHP | 3.99 | Descripción del producto | https://netbeans.org/images_www/v7/design/logo_netbeans_red.png
-S2 | Juan | juan@gmail.com | JAVA | 30.99 | Descripción del producto | https://netbeans.org/images_www/v7/design/logo_netbeans_red.png
-S3 | Pedro | pedro@gmail.com | JAVASCRIPT | 6.99 | Descripción del producto | https://netbeans.org/images_www/v7/design/logo_netbeans_red.png
-S4 | Pepito | pepito@gmail.com | PHP | 5.99 | Descripción del producto | https://netbeans.org/images_www/v7/design/logo_netbeans_red.png
-S5 | Jaime | jaime@gmail.com | PHP | 2.99 | Descripción del producto | https://netbeans.org/images_www/v7/design/logo_netbeans_red.png
-S6 | Minimal | minimal@gmail.com | PHP | 5.99 | Descripción del producto | https://netbeans.org/images_www/v7/design/logo_netbeans_red.png
+Social community <> Pepe <> pepe@gmail.com <> PHP <> 3.99 <> Descripción del producto <> https://netbeans.org/images_www/v7/design/logo_netbeans_red.png
+Xtreme Slideshow <> Juan <> juan@gmail.com <> JAVA <> 30.99 <> Descripción del producto <> https://netbeans.org/images_www/v7/design/logo_netbeans_red.png
+Banner Generator <> Pedro <> pedro@gmail.com <> JAVASCRIPT <> 6.99 <> Descripción del producto <> https://netbeans.org/images_www/v7/design/logo_netbeans_red.png
+Administrator Panel <> Pepito <> pepito@gmail.com <> PHP <> 5.99 <> Descripción del producto <> https://netbeans.org/images_www/v7/design/logo_netbeans_red.png
+HTML design maker <> Jaime <> jaime@gmail.com <> PHP <> 2.99 <> Descripción del producto <> https://netbeans.org/images_www/v7/design/logo_netbeans_red.png
+Canvas drawer <> Minimal <> minimal@gmail.com <> PHP <> 5.99 <> Descripción del producto <> https://netbeans.org/images_www/v7/design/logo_netbeans_red.png

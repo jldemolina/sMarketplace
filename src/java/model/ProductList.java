@@ -1,25 +1,29 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author Seruk
- */
 public class ProductList extends ArrayList<Product> {
-    private static ArrayList<Product> instance;
+    private static ProductList instance;
     
     private ProductList() {
     }
     
-    public static ArrayList<Product> getIntance() {
-        if (instance == null) instance = new ArrayList<Product>();
+    public static ProductList getIntance() {
+        if (instance == null) instance = new ProductList();
         return instance;
+    }
+    
+    public Product search(String name) {
+        for (Product product : this)
+            if (product.getName().equals(name))
+                return product;
+        return null;
+    }
+
+    @Override
+    public boolean add(Product product) {
+        if (search(product.getName()) != null) return false;
+        return super.add(product);
     }
     
 }

@@ -5,13 +5,13 @@ import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 
-public class HomeCommand extends FrontCommand {
+public class ShoppingCartCommand extends FrontCommand {
     
     @Override
     public void process() {
         request.setAttribute("Producto", "Musica X");
         
-        RequestDispatcher dispatcher = context.getRequestDispatcher("/homeView.jsp");
+        RequestDispatcher dispatcher = context.getRequestDispatcher("/cartView.jsp");
         try {
             dispatcher.forward(request,response);
         } catch (ServletException | IOException ex) {
