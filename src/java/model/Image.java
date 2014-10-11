@@ -1,14 +1,15 @@
 package model;
 
 public class Image {
-    private final Bitmap bitmap;
+    private final String url;
 
-    public Image(Bitmap bitmap) {
-        this.bitmap = bitmap;
+    public Image(String url) {
+        this.url = url;
+    }
+
+    public String getUrl() {
+        return url;
     }
     
-    public Bitmap getBitmap() {
-        return bitmap;
-    }
-
+    
 }

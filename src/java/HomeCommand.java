@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 
-public class HomeController extends FrontCommand {
+public class HomeCommand extends FrontCommand {
     
     @Override
     public void process() {
@@ -15,8 +15,7 @@ public class HomeController extends FrontCommand {
         try {
             dispatcher.forward(request,response);
         } catch (ServletException | IOException ex) {
-            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HomeCommand.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }
 }

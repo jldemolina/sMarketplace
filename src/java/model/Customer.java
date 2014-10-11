@@ -1,15 +1,23 @@
 package model;
 
-public class Customer {
-    private final ShoppingCart shoppingCart;
+public class Customer extends User {
+    private CartBeans shoppingCart;
     private boolean premium;
 
-    public Customer(ShoppingCart shoppingCart, boolean premium) {
+    public Customer(String username, String email) {
+        super(username, email);
+    }
+
+    public Customer(CartBeans shoppingCart, String username, String email) {
+        super(username, email);
         this.shoppingCart = shoppingCart;
-        this.premium = premium;
+    }
+
+    public void setShoppingCart(CartBeans shoppingCart) {
+        this.shoppingCart = shoppingCart;
     }
     
-    public ShoppingCart getShoppingCart() {
+    public CartBeans getShoppingCart() {
         return shoppingCart;
     }
 
@@ -20,6 +28,5 @@ public class Customer {
     public void setPremium(boolean premium) {
         this.premium = premium;
     }
-    
      
 }

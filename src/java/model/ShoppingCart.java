@@ -1,30 +1,15 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Map;
+import javax.ejb.Remote;
 
+@Remote
+public interface ShoppingCart {
 
-public class ShoppingCart {
-    private final String ID;
-    private Calendar creationDate;
-    private ArrayList<CartProduct> cartProducts;
+    public void initialize(User user);
+    public void addProduct(Product product); 
+    public void removeProduct(Product product); 
+    public Map<Product, Integer> getProducts();
+    public void clear();
 
-    public ShoppingCart(String ID, Calendar creationDate, ArrayList<CartProduct> cartProducts) {
-        this.ID = ID;
-        this.creationDate = creationDate;
-        this.cartProducts = cartProducts;
-    }
-
-    public Calendar getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Calendar creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public ArrayList<CartProduct> getCartProducts() {
-        return cartProducts;
-    }
-    
 }

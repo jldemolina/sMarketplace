@@ -12,15 +12,12 @@ public class FrontController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, InstantiationException {
-     
         try {
-            FrontCommand command = (FrontCommand) Class.forName(request.getParameter("command") + "Controller").newInstance();
+            FrontCommand command = (FrontCommand) Class.forName(request.getParameter("command") + "Command").newInstance();
             command.initialize(getServletContext(), request, response);
             command.process();
         } catch (IllegalAccessException ex) {
             Logger.getLogger(FrontController.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {            
-   
         }
     }
 
