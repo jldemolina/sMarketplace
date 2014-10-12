@@ -4,6 +4,9 @@
     Author     : Seruk
 --%>
 
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
+<%@page import="model.CartBeans"%>
 <%@page import="persistence.FileProductListLoader"%>
 <%@page import="model.ProductList"%>
 <%@page import="model.Product"%>
@@ -37,7 +40,7 @@
                 <li><a href="#">Payment</a></li>
             </ol>
         </div>
-        
+
         <div class="container text">
 
             <div class="col-md-5 col-sm-12">
@@ -48,14 +51,18 @@
                     <%
                         new FileProductListLoader("/Users/Seruk/Google Drive/Proyectos/Espacio de trabajo personal/NetBeans/sMarketplace/sMarketplace/data/products.txt").load();
                         for (Product product : ProductList.getIntance()) {
-                        %> <li class="row">
-                                <span class="quantity"> &infin; </span>
-                                <span class="itemName"> <% out.println(product.getName()); %> </span>
-                                <span class="addbtn"><a class="glyphicon glyphicon-plus-sign"></a></span>
-                                <span class="price"> <% out.println(product.getPrice()); %> </span>
-                            </li>
-                        <% } %>
-                       
+                    %> 
+                    <li class="row">
+                        <form action="FrontController" method="GET">
+                            <input type="hidden" name="command" value="AddToCart">
+                            <input type="hidden" name="ProductId" value=<% out.println(product.getId()); %>>
+                            <span class="itemName"> <% out.println(product.getName()); %> </span>
+                            <span class="addbtn"><input type="submit" class="btn btn-default"value="+"></span>
+                            <span class="price"> <% out.println(product.getPrice()); %> </span>
+                        </form> 
+                    </li>
+                    <% } %>
+
                 </ul>
             </div>
 
@@ -64,41 +71,32 @@
                     <li class="row list-inline columnCaptions">
                         <span>IN-CART ITEMS</span>
                     </li>
+
+                    <%  CartBeans cart = (CartBeans) request.getSession().getAttribute("Cart");
+                        for (Map.Entry<Product, Integer> entry : cart.getProducts().entrySet()) { %>
                     <li class="row">
-                        <span class="quantity">1</span>
-                        <span class="itemName">Birthday Cake</span>
-                        <span class="popbtn"><a class="arrow"></a></span>
-                        <span class="price">$49.95</span>
+                        <span class="quantity"> <% out.println(entry.getValue()); %></span>
+                        <span class="itemName"> <% out.println(entry.getKey().getName()); %> </span>
+                        <form action="FrontController" method="GET">
+                            <input type="hidden" name="command" value="RemoveFromCart">
+                            <input type="hidden" name="ProductId" value=<% out.println(entry.getKey().getId()); %>>
+                            <span class="deletebtn"><input type="submit" class="btn btn-default"value="-"></span>
+                        </form>
+                        <form action="FrontController" method="GET">
+                            <input type="hidden" name="command" value="AddToCart">
+                            <input type="hidden" name="ProductId" value=<% out.println(entry.getKey().getId()); %>>
+                            <span class="addbtn"><input type="submit" class="btn btn-default"value="+"></span>
+                        </form>
+                            <span class="price"> <% out.println(entry.getKey().getPrice() + "€"); %></span>
                     </li>
-                    <li class="row">
-                        <span class="quantity">50</span>
-                        <span class="itemName">Party Cups</span>
-                        <span class="popbtn"><a class="arrow"></a></span>
-                        <span class="price">$5.00</span>
-                    </li>
-                    <li class="row">
-                        <span class="quantity">20</span>
-                        <span class="itemName">Beer kegs</span>
-                        <span class="popbtn"><a class="arrow"></a></span>
-                        <span class="price">$919.99</span>				
-                    </li>
-                    <li class="row">
-                        <span class="quantity">18</span>
-                        <span class="itemName">Pound of beef</span>
-                        <span class="popbtn"><a class="arrow"></a></span>
-                        <span class="price">$269.45</span>
-                    </li>
-                    <li class="row">
-                        <span class="quantity">1</span>
-                        <span class="itemName">Bullet-proof vest</span>
-                        <span class="popbtn"  data-parent="#asd" data-toggle="collapse" data-target="#demo"><a class="arrow"></a></span>
-                        <span class="price">$450.00</span>				
-                    </li>
+                    <% }%>
                     <li class="row totals">
                         <span class="itemName">Total:</span>
-                        <span class="price">$1694.43</span>
+                        <span class="price"> <% out.println(((CartBeans) request.getSession().getAttribute("Cart")).getTotalPrice() + "€"); %></span>
                         <span class="order"> <a class="text-center">ORDER</a></span>
                     </li>
+
+
                 </ul>
             </div>
 
@@ -107,8 +105,16 @@
         <!-- The popover content -->
 
         <div id="popover" style="display: none">
-            <a href="#"><span class="glyphicon glyphicon-pencil"></span></a>
-            <a href="#"><span class="glyphicon glyphicon-remove"></span></a>
+            <form action="FrontController" method="GET">
+                <input type="submit" class="btn btn-default"value="+">
+                <input type="hidden" name="command" value="AddToCart">
+                <input type="hidden" name="ProductId" value=<% //out.println(product.getId()); %>>
+            </form>
+            <form action="FrontController" method="GET">
+                <input type="submit" class="btn btn-default"value="-">
+                <input type="hidden" name="command" value="DeleteFromCart">
+                <input type="hidden" name="ProductId" value=<% // out.println(product.getId()); %>>
+            </form>
         </div>
 
         <!-- JavaScript includes -->

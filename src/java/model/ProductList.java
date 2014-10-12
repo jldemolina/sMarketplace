@@ -13,16 +13,23 @@ public class ProductList extends ArrayList<Product> {
         return instance;
     }
     
-    public Product search(String name) {
+    public Product searchByName(String name) {
         for (Product product : this)
             if (product.getName().equals(name))
                 return product;
         return null;
     }
+    
+    public Product searchById(String id) {
+        for (Product product : this)
+            if (product.getId().equals(id))
+                return product;                
+        return null;
+    }
 
     @Override
     public boolean add(Product product) {
-        if (search(product.getName()) != null) return false;
+        if (searchById(product.getId()) != null) return false;
         return super.add(product);
     }
     

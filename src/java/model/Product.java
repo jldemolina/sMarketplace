@@ -1,6 +1,7 @@
 package model;
 
 public class Product {
+    private final String id;
     private String name;
     private User author;
     private Language language;
@@ -8,7 +9,8 @@ public class Product {
     private String description;
     private Image image;
 
-    public Product(String name, User author, Language language, double price, String description, Image image) {
+    public Product(String id, String name, User author, Language language, double price, String description, Image image) {
+        this.id = id;
         this.name = name;
         this.author = author;
         this.language = language;
@@ -16,6 +18,10 @@ public class Product {
         this.description = description;
         this.image = image;
     }
+
+    public String getId() {
+        return id;
+    }    
 
     public String getName() {
         return name;

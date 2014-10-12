@@ -29,11 +29,12 @@ public class FileProductListLoader implements ProductListLoader {
                     if (line == null)
                         break;
                     String[] productStringData = line.split("<>");
-                    script = new Product(productStringData[0].trim(),
-                            new Customer(productStringData[1].trim(), productStringData[2].trim()),
+                    script = new Product(productStringData[0].trim(), 
+                            productStringData[1].trim(),
+                            new Customer(productStringData[2].trim(), productStringData[3].trim()),
                             Language.PHP, // TODO - EDIT
-                            Double.valueOf(productStringData[4].trim()),  productStringData[5].trim(),
-                            new Image(productStringData[6].trim()));
+                            Double.valueOf(productStringData[5].trim()),  productStringData[6].trim(),
+                            new Image(productStringData[7].trim()));
                     ProductList.getIntance().add(script);
                 }
             }

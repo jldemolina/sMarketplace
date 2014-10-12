@@ -7,7 +7,7 @@ import javax.ejb.Stateful;
 @Stateful
 public class CartBeans implements ShoppingCart {
     private User user;
-    private Map<Product, Integer> cartProducts;
+    private HashMap<Product, Integer> cartProducts;
 
     @Override
     public void initialize(User user) {
@@ -17,19 +17,22 @@ public class CartBeans implements ShoppingCart {
 
     @Override
     public void addProduct(Product product) {
-        if (getQuantify(product) == null) cartProducts.put(product, 0);
-        else cartProducts.put(product, cartProducts.get(product) + 1);
-        
+        if (cartProducts.containsKey(product)) 
+            cartProducts.put(product, cartProducts.get(product) + 1);
+        else 
+            cartProducts.put(product, 1);   
     }
 
     @Override
     public void removeProduct(Product product) {
-        if (getQuantify(product) == 0) cartProducts.remove(product);
-        else cartProducts.put(product, cartProducts.get(product) - 1);
+        if (cartProducts.get(product) > 1)
+            cartProducts.put(product, cartProducts.get(product) - 1);
+        else
+           cartProducts.remove(product);  
     }
 
     @Override
-    public Map<Product, Integer> getProducts() {
+    public HashMap<Product, Integer> getProducts() {
         return new HashMap<>(cartProducts);
     }
 
@@ -38,12 +41,11 @@ public class CartBeans implements ShoppingCart {
         cartProducts.clear();
     }
     
-    private Integer getQuantify(Product product) {
-        for(Map.Entry<Product, Integer> entry : cartProducts.entrySet()) {
-            if (entry.getKey().getName().equals(product.getName()));
-                return entry.getValue();
-        }
-        return null;
+    public double getTotalPrice() {
+        double total = 0;
+        for(Map.Entry<Product, Integer> entry : cartProducts.entrySet())
+            total += entry.getKey().getPrice() * entry.getValue();
+        return total;
     }
     
 }

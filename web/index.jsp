@@ -102,7 +102,7 @@
             <div class="container">
                 <div class="col-lg-8 col-lg-offset-2 text-center">
                     <form action="FrontController" method="GET">
-                        <input type="hidden" name="command" value="ShoppingCart">
+                        <input type="hidden" name="command" value="ShowCart">
                         <input class="btn btn-lg btn-outline" type="submit" value="Go to the Shopping Cart"></i>
                     </form> 
                     </a>
