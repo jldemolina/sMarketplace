@@ -42,14 +42,13 @@
         </div>
 
         <div class="container text">
-
             <div class="col-md-5 col-sm-12">
                 <ul>
                     <li class="row list-inline columnCaptions">
                         <span>RECOMMENDED AND AVAILABLE ITEMS</span>
                     </li>
                     <%
-                        new FileProductListLoader("/Users/Seruk/Google Drive/Proyectos/Espacio de trabajo personal/NetBeans/sMarketplace/sMarketplace/data/products.txt").load();
+                        new FileProductListLoader("V:/Proyectos/Espacio de trabajo personal/NetBeans/sMarketplace/sMarketplace/data/products.txt").load();
                         for (Product product : ProductList.getIntance()) {
                     %> 
                     <li class="row">
@@ -93,7 +92,7 @@
                     <li class="row totals">
                         <span class="itemName">Total:</span>
                         <span class="price"> <% out.println(((CartBeans) request.getSession().getAttribute("Cart")).getTotalPrice() + "€"); %></span>
-                        <span class="order"> <a class="text-center">ORDER</a></span>
+                        <span class="order" data-toggle="modal" data-target="#myModal" > <a class="text-center">ORDER</a></span>
                     </li>
 
 
@@ -116,12 +115,50 @@
                 <input type="hidden" name="ProductId" value=<% // out.println(product.getId()); %>>
             </form>
         </div>
+            
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                   <div class="modal-content">
+                     <div class="modal-header">
+                       <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                       <h4 class="modal-title" id="myModalLabel">Datos de compra</h4>
+                     </div>
+                     <div class="modal-body">
+                        <br>
+                        Full name:
+                        <input type="text" class="form-control">
+                        <br>
+                        Email address:
+                        <input type="text" class="form-control">
+                        <br>
+                        Current residence:
+                        <div class="radio">
+                          <label><input type="radio" name="optradio">Canary Islands</label>
+                        </div>
+                        <div class="radio">
+                          <label><input type="radio" name="optradio">Iberian Peninsula</label>
+                        </div>
+                        <div class="radio disabled">
+                          <label><input type="radio" name="optradio" disabled>Out of Spain</label>
+                        </div>                        
+                     </div>
+                     <div class="modal-footer">
+                    <form action="FrontController" method="GET">
+                        <input type="hidden" name="command" value="ShowInvoice">
+                        <button id="processButton" type="submit" class="btn btn-primary">Process</button>
+                    </form> 
+                     </div>
+                   </div>
+                 </div>
+               </div>
+    </div>
 
         <!-- JavaScript includes -->
 
         <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script> 
         <script src="assets/js/bootstrap.min.js"></script>
         <script src="assets/js/customjs.js"></script>
+        
 
     </body>
 </html>

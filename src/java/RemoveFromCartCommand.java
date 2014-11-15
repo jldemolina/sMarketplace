@@ -16,7 +16,7 @@ public class RemoveFromCartCommand extends FrontCommand {
         try {
             dispatcher.forward(request, response);
         } catch (ServletException | IOException ex) {
-            Logger.getLogger(HomeCommand.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ShowInvoiceCommand.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

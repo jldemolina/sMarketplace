@@ -2,19 +2,15 @@ package model;
 
 import java.util.HashMap;
 import java.util.Map;
-import javax.ejb.Stateful;
 
-@Stateful
 public class CartBeans implements ShoppingCart {
-    private User user;
     private HashMap<Product, Integer> cartProducts;
 
     @Override
     public void initialize(User user) {
         cartProducts = new HashMap<>();
-        this.user = user;
     }
-
+    
     @Override
     public void addProduct(Product product) {
         if (cartProducts.containsKey(product)) 
