@@ -95,6 +95,10 @@ a:hover {
 	padding: 0;
 }
 
+.col-md-5.col-sm-13{
+	padding: 0;
+}
+
 .col-md-5.col-sm-12 h1{
 	color: #595c5f;
 	font-size: 24px;
@@ -103,7 +107,22 @@ a:hover {
 	text-align: left;
 }
 
+.col-md-5.col-sm-13 h1{
+	color: #595c5f;
+	font-size: 24px;
+	font-weight: bold;
+	margin-bottom:30px;
+	text-align: left;
+}
+
 .col-md-5.col-sm-12 p{
+	color: #898e92;
+	line-height: 1.5;
+	max-width: 400px;
+	text-align: justify;
+}
+
+.col-md-5.col-sm-13 p{
 	color: #898e92;
 	line-height: 1.5;
 	max-width: 400px;
@@ -127,6 +146,12 @@ a:hover {
 .col-md-7.col-sm-12{
 	padding-left: 50px ;
 	margin-bottom: 72px;
+}
+
+.col-md-7.col-sm-13{
+    position: absolute;
+    right: 0px;
+    margin-bottom: 72px;
 }
 
 .row{
@@ -321,13 +346,26 @@ a:hover {
 	.col-md-5.col-sm-12 h1{
 		text-align: center;
 	}
-
+        
+	.col-md-5.col-sm-13 h1{
+		text-align: center;
+	}
+        
 	.col-md-5.col-sm-12 p{
 		margin: 0 auto 64px auto;
 		text-align: justify;
 	}
-
+        
+	.col-md-5.col-sm-13 p{
+		text-align: justify;
+	}
+        
 	.col-md-7.col-sm-12{
+		padding-left: 10px ;
+		padding-right: 50px;
+	}
+        
+        .col-md-7.col-sm-13{
 		padding-left: 10px ;
 		padding-right: 50px;
 	}
@@ -362,6 +400,10 @@ a:hover {
 	}
 
 	.col-md-5.col-sm-12 p{
+		max-width: 300px;
+	}
+        
+        .col-md-5.col-sm-13 p{
 		max-width: 300px;
 	}
 

@@ -98,7 +98,6 @@
                         <span class="order" data-toggle="modal" data-target="#myModal" > <a class="text-center">ORDER</a></span>
                     </li>
 
-
                 </ul>
             </div>
 

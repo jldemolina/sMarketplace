@@ -44,4 +44,11 @@ public class CartBeans implements ShoppingCart {
         return total;
     }
     
+    public int getTotalItems() {
+        int total = 0;
+        for(Map.Entry<Product, Integer> entry : cartProducts.entrySet())
+            total += 1 * entry.getValue();
+        return total;
+    }
+    
 }

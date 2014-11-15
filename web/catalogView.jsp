@@ -28,7 +28,7 @@
 
         <nav class="navbar">
             <div class="container">
-                <a class="navbar-brand" href="#">Shopping Cart</a>
+                <a class="navbar-brand" href="#">Catalog</a>
                 <div class="navbar-right">
                     <div class="container minicart"></div>
                 </div>
@@ -40,46 +40,45 @@
         <br>
 
         <div class="container text">
-            <div class="col-md-5 col-sm-12">
-                <ul>
-                    <li class="row list-inline columnCaptions">
-                        <span>RECOMMENDED AND AVAILABLE ITEMS</span>
-                    </li>
-                    <%
-                        new FileProductListLoader("V:/Proyectos/Espacio de trabajo personal/NetBeans/sMarketplace/sMarketplace/data/products.txt").load();
-                        for (Product product : ProductList.getIntance()) {
-                    %> 
-                    <li class="row">
+            <div align="center" style="width:500px; margin:0 auto 0 auto">
+                    <ul>
+                        <li class="row list-inline columnCaptions">
+                            <span>AVAILABLE ITEMS</span>
+                        </li>
+                        <%
+                            new FileProductListLoader("V:/Proyectos/Espacio de trabajo personal/NetBeans/sMarketplace/sMarketplace/data/products.txt").load();
+                            for (Product product : ProductList.getIntance()) {
+                        %> 
+                        <li class="row">
+                            <form action="FrontController" method="GET">
+                                <input type="hidden" name="command" value="AddToCart">
+                                <input type="hidden" name="Page" value="catalog">
+                                <input type="hidden" name="ProductId" value=<% out.println(product.getId()); %>>
+                                <span class="itemName"> <% out.println(product.getName()); %> </span>
+                                <span class="addbtn"><input type="submit" class="btn btn-default"value="+"></span>
+                                <span class="price"> <% out.println(product.getPrice()); %> </span>
+                            </form> 
+                        </li>
+                        <% } %>
+                    </ul>
                         <form action="FrontController" method="GET">
-                            <input type="hidden" name="command" value="AddToCart">
-                            <input type="hidden" name="Page" value="catalog">
-                            <input type="hidden" name="ProductId" value=<% out.println(product.getId()); %>>
-                            <span class="itemName"> <% out.println(product.getName()); %> </span>
-                            <span class="addbtn"><input type="submit" class="btn btn-default"value="+"></span>
-                            <span class="price"> <% out.println(product.getPrice()); %> </span>
+                            <input type="hidden" name="command" value="ShowCart">
+                            <br>
+                            <div align="right"> <span class="order"><button class="btn btn-primary">View cart (<% out.println(((CartBeans) request.getSession().getAttribute("Cart")).getTotalItems());%> items)</button> </span> </div>
+                            <br>
                         </form> 
-                    </li>
-                    <% } %>
-                </ul>
-                <li class="row totals">
-                    <form action="FrontController" method="GET">
-                        <input type="hidden" name="command" value="ShowCart">
-                        <span class="itemName">Total items in cart: </span>
-                        <span class="price"> <% out.println(((CartBeans) request.getSession().getAttribute("Cart")).getProducts().size());%></span>
-                        <span class="order"><button class="btn btn-primary">View cart</button> </span>
-                    </form> 
-                </li>
+                </div>
             </div>
-        </ul>
+
+        </div>
+
     </div>
 
-</div>
+    <!-- JavaScript includes -->
 
-<!-- JavaScript includes -->
-
-<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script> 
-<script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/js/customjs.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script> 
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/customjs.js"></script>
 
 
 </body>
