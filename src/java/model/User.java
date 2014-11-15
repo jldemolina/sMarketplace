@@ -3,14 +3,9 @@ package model;
 public abstract class User {
     private String username;
     private String email;
-    private Image avatar;
+    private String ubication;
+    private String paymentMethod;
 
-    public User(String username, String email, Image avatar) {
-        this.username = username;
-        this.email = email;
-        this.avatar = avatar;
-    }
-    
     public User(String username, String email) {
         this.username = username;
         this.email = email;
@@ -32,12 +27,20 @@ public abstract class User {
         this.email = email;
     }
 
-    public Image getAvatar() {
-        return avatar;
+    public String getUbication() {
+        return ubication;
     }
 
-    public void setAvatar(Image avatar) {
-        this.avatar = avatar;
+    public void setUbication(String ubication) {
+        this.ubication = ubication;
     }
-    
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+   
 }

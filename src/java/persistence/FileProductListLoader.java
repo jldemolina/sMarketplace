@@ -32,7 +32,7 @@ public class FileProductListLoader implements ProductListLoader {
                     script = new Product(productStringData[0].trim(), 
                             productStringData[1].trim(),
                             new Customer(productStringData[2].trim(), productStringData[3].trim()),
-                            Language.PHP, // TODO - EDIT
+                            Language.PHP,
                             Double.valueOf(productStringData[5].trim()),  productStringData[6].trim(),
                             new Image(productStringData[7].trim()));
                     ProductList.getIntance().add(script);

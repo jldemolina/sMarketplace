@@ -4,6 +4,8 @@
     Author     : Seruk
 --%>
 
+<%@page import="model.User"%>
+<%@page import="model.Invoice"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
 <%@page import="model.CartBeans"%>
@@ -86,12 +88,12 @@
                             <input type="hidden" name="ProductId" value=<% out.println(entry.getKey().getId()); %>>
                             <span class="addbtn"><input type="submit" class="btn btn-default"value="+"></span>
                         </form>
-                            <span class="price"> <% out.println(entry.getKey().getPrice() + "€"); %></span>
+                        <span class="price"> <% out.println(entry.getKey().getPrice() + "€"); %></span>
                     </li>
                     <% }%>
                     <li class="row totals">
                         <span class="itemName">Total:</span>
-                        <span class="price"> <% out.println(((CartBeans) request.getSession().getAttribute("Cart")).getTotalPrice() + "€"); %></span>
+                        <span class="price"> <% out.println(((CartBeans) request.getSession().getAttribute("Cart")).getTotalPrice() + "€");%></span>
                         <span class="order" data-toggle="modal" data-target="#myModal" > <a class="text-center">ORDER</a></span>
                     </li>
 
@@ -107,58 +109,61 @@
             <form action="FrontController" method="GET">
                 <input type="submit" class="btn btn-default"value="+">
                 <input type="hidden" name="command" value="AddToCart">
-                <input type="hidden" name="ProductId" value=<% //out.println(product.getId()); %>>
+                <input type="hidden" name="ProductId">
             </form>
             <form action="FrontController" method="GET">
                 <input type="submit" class="btn btn-default"value="-">
                 <input type="hidden" name="command" value="DeleteFromCart">
-                <input type="hidden" name="ProductId" value=<% // out.println(product.getId()); %>>
+                <input type="hidden" name="ProductId">
             </form>
         </div>
-            
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                   <div class="modal-content">
-                     <div class="modal-header">
-                       <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                       <h4 class="modal-title" id="myModalLabel">Datos de compra</h4>
-                     </div>
-                     <div class="modal-body">
-                        <br>
-                        Full name:
-                        <input type="text" class="form-control">
-                        <br>
-                        Email address:
-                        <input type="text" class="form-control">
-                        <br>
-                        Current residence:
-                        <div class="radio">
-                          <label><input type="radio" name="optradio">Canary Islands</label>
-                        </div>
-                        <div class="radio">
-                          <label><input type="radio" name="optradio">Iberian Peninsula</label>
-                        </div>
-                        <div class="radio disabled">
-                          <label><input type="radio" name="optradio" disabled>Out of Spain</label>
-                        </div>                        
-                     </div>
-                     <div class="modal-footer">
+
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Datos de compra</h4>
+                    </div>
                     <form action="FrontController" method="GET">
-                        <input type="hidden" name="command" value="ShowInvoice">
-                        <button id="processButton" type="submit" class="btn btn-primary">Process</button>
+
+                        <div class="modal-body">
+                            <br>
+                            Full name:
+                            <input name="name" type="text" class="form-control">
+                            <br>
+                            Email address:
+                            <input name="email" type="text" class="form-control">
+                            <br>
+                            Current residence:
+                            <div class="radio">
+                                <label><input type="radio" name="ubication" value="Canary Islands">Canary Islands</label>
+                            </div>
+                            <div class="radio">
+                                <label><input type="radio" name="ubication" value="Iberian Peninsula">Iberian Peninsula</label>
+                            </div>
+                            <div class="radio disabled">
+                                <label><input type="radio" name="ubication" value="Out of Spain" disabled>Out of Spain</label>
+                            </div>                        
+                        </div>
+                        <div class="modal-footer">
+                            <input type="hidden" name="command" value="ShowInvoice">
+                            <button id="processButton" type="submit" name="paymentMethod" value="Paypal" class="btn btn-primary">Paypal</button>
+                            <button id="processButton" type="submit" name="paymentMethod" value="Credit Card" class="btn btn-primary">Credit Card</button>
+                            <button id="processButton" type="submit" name="paymentMethod" value="PaySafeCard" class="btn btn-primary">PaySafeCard</button>
+                        </div>
                     </form> 
-                     </div>
-                   </div>
-                 </div>
-               </div>
+
+                </div>
+            </div>
+        </div>
     </div>
+    <!-- JavaScript includes -->
 
-        <!-- JavaScript includes -->
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script> 
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/customjs.js"></script>
 
-        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script> 
-        <script src="assets/js/bootstrap.min.js"></script>
-        <script src="assets/js/customjs.js"></script>
-        
 
-    </body>
+</body>
 </html>
