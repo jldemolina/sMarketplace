@@ -12,7 +12,9 @@ public class AddToCartCommand extends FrontCommand {
     @Override
     public void process() {
         addToCart(request);
-        RequestDispatcher dispatcher = context.getRequestDispatcher("/cartView.jsp");
+        RequestDispatcher dispatcher = context.getRequestDispatcher("/" +  
+                request.getParameter("Page") + 
+                "View.jsp");
         try {
             dispatcher.forward(request, response);
         } catch (ServletException | IOException ex) {

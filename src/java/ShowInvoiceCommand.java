@@ -17,7 +17,6 @@ public class ShowInvoiceCommand extends FrontCommand {
         User user = new Customer((String) request.getParameter("name"), (String) request.getParameter("email"));
         user.setPaymentMethod(request.getParameter("paymentMethod"));
         Invoice invoice = new Invoice( user, ((CartBeans)(request.getSession().getAttribute("Cart"))).getProducts());
-        System.out.println("");
         try {
             request.getSession().setAttribute("Invoice", invoice);
             dispatcher.forward(request,response);

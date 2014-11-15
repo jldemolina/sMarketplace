@@ -56,6 +56,7 @@
                     <li class="row">
                         <form action="FrontController" method="GET">
                             <input type="hidden" name="command" value="AddToCart">
+                            <input type="hidden" name="Page" value="cart">
                             <input type="hidden" name="ProductId" value=<% out.println(product.getId()); %>>
                             <span class="itemName"> <% out.println(product.getName()); %> </span>
                             <span class="addbtn"><input type="submit" class="btn btn-default"value="+"></span>
