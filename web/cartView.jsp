@@ -1,3 +1,4 @@
+
 <%-- 
     Document   : cart
     Created on : 11-oct-2014, 13:56:50
@@ -44,30 +45,10 @@
         </div>
 
         <div class="container text">
-            <div class="col-md-5 col-sm-12">
-                <ul>
-                    <li class="row list-inline columnCaptions">
-                        <span>RECOMMENDED AND AVAILABLE ITEMS</span>
-                    </li>
-                    <%
-                        new FileProductListLoader("V:/Proyectos/Espacio de trabajo personal/NetBeans/sMarketplace/sMarketplace/data/products.txt").load();
-                        for (Product product : ProductList.getIntance()) {
-                    %> 
-                    <li class="row">
-                        <form action="FrontController" method="GET">
-                            <input type="hidden" name="command" value="AddToCart">
-                            <input type="hidden" name="Page" value="cart">
-                            <input type="hidden" name="ProductId" value=<% out.println(product.getId()); %>>
-                            <span class="itemName"> <% out.println(product.getName()); %> </span>
-                            <span class="addbtn"><input type="submit" class="btn btn-default"value="+"></span>
-                            <span class="price"> <% out.println(product.getPrice()); %> </span>
-                        </form> 
-                    </li>
-                    <% } %>
 
-                </ul>
-            </div>
-
+            <%
+                new FileProductListLoader("V:/Proyectos/Espacio de trabajo personal/NetBeans/sMarketplace/sMarketplace/data/products.txt").load();
+            %>
             <div class="col-md-7 col-sm-12 text-left">
                 <ul>
                     <li class="row list-inline columnCaptions">
@@ -86,6 +67,7 @@
                         </form>
                         <form action="FrontController" method="GET">
                             <input type="hidden" name="command" value="AddToCart">
+                            <input type="hidden" name="Page" value="cart">
                             <input type="hidden" name="ProductId" value=<% out.println(entry.getKey().getId()); %>>
                             <span class="addbtn"><input type="submit" class="btn btn-default"value="+"></span>
                         </form>
@@ -98,24 +80,10 @@
                         <span class="order" data-toggle="modal" data-target="#myModal" > <a class="text-center">ORDER</a></span>
                     </li>
 
+
                 </ul>
             </div>
 
-        </div>
-
-        <!-- The popover content -->
-
-        <div id="popover" style="display: none">
-            <form action="FrontController" method="GET">
-                <input type="submit" class="btn btn-default"value="+">
-                <input type="hidden" name="command" value="AddToCart">
-                <input type="hidden" name="ProductId">
-            </form>
-            <form action="FrontController" method="GET">
-                <input type="submit" class="btn btn-default"value="-">
-                <input type="hidden" name="command" value="DeleteFromCart">
-                <input type="hidden" name="ProductId">
-            </form>
         </div>
 
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
