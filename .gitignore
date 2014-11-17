@@ -36,3 +36,10 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+/sMarketplaceE2/nbproject/private/
+/sMarketplaceE2/sMarketplaceE2-war/nbproject/private/
+/sMarketplaceE2/sMarketplaceE2-ejb/nbproject/private/
+/sMarketplaceE2-ejb/build/
+/sMarketplaceE2-ejb/dist/
+/sMarketplaceE2-war/dist/
+/sMarketplaceE2-war/build/
