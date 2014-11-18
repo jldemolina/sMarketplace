@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import ejb.CartBeans;
+import ejb.CartBean;
 import persistence.FileProductListLoader;
 
 /*
@@ -17,13 +17,13 @@ import persistence.FileProductListLoader;
  *
  * @author Seruk
  */
-public class ShowCatalogCommand extends FrontCommand {
+public class ShowCatalogueCommand extends FrontCommand {
 
     @Override
     public void process() {
         new FileProductListLoader("V:/Proyectos/Espacio de trabajo personal/NetBeans/sMarketplace/Entrega 2/sMarketplace/data/products.txt").load();
        
-        RequestDispatcher dispatcher = context.getRequestDispatcher("/catalogView.jsp");
+        RequestDispatcher dispatcher = context.getRequestDispatcher("/catalogueView.jsp");
         try {
             dispatcher.forward(request, response);
         } catch (ServletException | IOException ex) {

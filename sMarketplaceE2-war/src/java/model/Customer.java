@@ -1,25 +1,25 @@
 package model;
 
-import ejb.CartBeans;
+import ejb.CartBean;
 
 public class Customer extends User {
-    private CartBeans shoppingCart;
+    private CartBean shoppingCart;
     private boolean premium;
 
     public Customer(String username, String email) {
         super(username, email);
     }
 
-    public Customer(CartBeans shoppingCart, String username, String email) {
+    public Customer(CartBean shoppingCart, String username, String email) {
         super(username, email);
         this.shoppingCart = shoppingCart;
     }
 
-    public void setShoppingCart(CartBeans shoppingCart) {
+    public void setShoppingCart(CartBean shoppingCart) {
         this.shoppingCart = shoppingCart;
     }
     
-    public CartBeans getShoppingCart() {
+    public CartBean getShoppingCart() {
         return shoppingCart;
     }
 

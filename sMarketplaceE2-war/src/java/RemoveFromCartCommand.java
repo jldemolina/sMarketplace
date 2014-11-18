@@ -1,4 +1,6 @@
-import ejb.CartBeans;
+import com.sun.org.apache.xml.internal.resolver.Catalog;
+import ejb.CartBean;
+import ejb.Catalogue;
 import ejb.ShoppingCart;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -10,16 +12,19 @@ import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import model.ProductList;
+import ejb.CatalogueBean;
 
 public class RemoveFromCartCommand extends FrontCommand {
 
     @EJB
     private ShoppingCart cart;
+    @EJB
+    private Catalogue catalogue;
     
     @Override
     public void process() {
         initCart();
+        initCatalogue();
         deleteFromCart(request);
         RequestDispatcher dispatcher = context.getRequestDispatcher("/cartView.jsp");
         try {
@@ -30,12 +35,20 @@ public class RemoveFromCartCommand extends FrontCommand {
     }
     
      private void deleteFromCart(HttpServletRequest request) {
-        cart.removeProduct(ProductList.getIntance().searchById(request.getParameter("ProductId")));
+        cart.removeProduct(catalogue.searchById(request.getParameter("ProductId")));
     }
 
     private void initCart() {
         try {
-            cart = (ShoppingCart) new InitialContext().lookup("java:app/sMarketplaceE2-war/CartBeans");
+            cart = (ShoppingCart) new InitialContext().lookup("java:app/sMarketplaceE2-war/CartBean");
+        } catch (NamingException ex) {
+            Logger.getLogger(AddToCartCommand.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void initCatalogue() {
+        try {
+            catalogue = (Catalogue) new InitialContext().lookup("java:app/sMarketplaceE2-war/CatalogueBean");
         } catch (NamingException ex) {
             Logger.getLogger(AddToCartCommand.class.getName()).log(Level.SEVERE, null, ex);
         }

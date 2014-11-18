@@ -4,9 +4,10 @@
     Author     : Seruk
 --%>
 
+<%@page import="persistence.FileProductListLoader"%>
+<%@page import="ejb.Catalogue"%>
 <%@page import="javax.naming.InitialContext"%>
 <%@page import="ejb.ShoppingCart"%>
-<%@page import="model.ProductList"%>
 <%@page import="model.Product"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -42,12 +43,12 @@
                             <span>AVAILABLE ITEMS</span>
                         </li>
                         <%
-                            for (Product product : ProductList.getIntance()) {
+                            for (Product product : ((Catalogue) new InitialContext().lookup("java:app/sMarketplaceE2-war/CatalogueBean")).getProducts()) {
                         %> 
                         <li class="row">
                             <form action="FrontController" method="GET">
                                 <input type="hidden" name="command" value="AddToCart">
-                                <input type="hidden" name="Page" value="catalog">
+                                <input type="hidden" name="Page" value="catalogue">
                                 <input type="hidden" name="ProductId" value=<% out.println(product.getId()); %>>
                                 <span class="itemName"> <% out.println(product.getName()); %> </span>
                                 <span class="addbtn"><input type="submit" class="btn btn-default"value="+"></span>
@@ -59,7 +60,7 @@
                         <form action="FrontController" method="GET">
                             <input type="hidden" name="command" value="ShowCart">
                             <br>
-                            <div align="right"> <span class="order"><button class="btn btn-primary">View cart (<% out.println(((ShoppingCart) new InitialContext().lookup("java:app/sMarketplaceE2-war/CartBeans")).getTotalItems());%> items)</button> </span> </div>
+                            <div align="right"> <span class="order"><button class="btn btn-primary">View cart (<% out.println(((ShoppingCart) new InitialContext().lookup("java:app/sMarketplaceE2-war/CartBean")).getTotalItems());%> items)</button> </span> </div>
                             <br>
                         </form> 
                 </div>

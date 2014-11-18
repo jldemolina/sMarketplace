@@ -3,7 +3,6 @@
 <%@page import="javax.ejb.embeddable.EJBContainer"%>
 <%@page import="javax.naming.Context"%>
 <%@page import="ejb.ShoppingCart"%>
-<%@page import="ejb.CartBeans"%>
 <%@page import="javax.naming.InitialContext"%>
 <%-- 
     Document   : cart
@@ -12,11 +11,9 @@
 --%>
 
 <%@page import="model.User"%>
-<%@page import="model.Invoice"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
 <%@page import="persistence.FileProductListLoader"%>
-<%@page import="model.ProductList"%>
 <%@page import="model.Product"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -57,7 +54,7 @@
                     </li>
 
                     <%  
-                        ShoppingCart cart = (ShoppingCart) new InitialContext().lookup("java:app/sMarketplaceE2-war/CartBeans");
+                        ShoppingCart cart = (ShoppingCart) new InitialContext().lookup("java:app/sMarketplaceE2-war/CartBean");
                         for (Map.Entry<Product, Integer> entry : cart.getProducts().entrySet()) { %>
                     <li class="row">
                         <span class="quantity"> <% out.println(entry.getValue()); %></span>

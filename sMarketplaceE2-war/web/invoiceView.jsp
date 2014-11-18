@@ -5,7 +5,7 @@
 --%>
 
 <%@page import="model.Customer"%>
-<%@page import="model.CartBeans"%>
+<%@page import="ejb.CartBean"%>
 <%@page import="java.util.Map"%>
 <%@page import="model.Product"%>
 <%@page import="model.Invoice"%>

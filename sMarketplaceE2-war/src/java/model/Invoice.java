@@ -5,14 +5,14 @@ import java.util.Map;
 
 public class Invoice {
     private final User user;
-    private HashMap<Product, Integer> products;
+    private Map<Product, Integer> products;
 
-    public Invoice(User user, HashMap<Product, Integer> products) {
+    public Invoice(User user, Map<Product, Integer> products) {
         this.user = user;
         this.products = products;
     }
 
-    public HashMap<Product, Integer> getProducts() {
+    public Map<Product, Integer> getProducts() {
         return products;
     }
 
@@ -26,8 +26,6 @@ public class Invoice {
             total += entry.getKey().getPrice() * entry.getValue();
         }
         return total;
-    }
-
-    
+    } 
 
 }

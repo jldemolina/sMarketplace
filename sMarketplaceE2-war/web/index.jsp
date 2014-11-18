@@ -106,7 +106,7 @@
                         <input class="btn btn-lg btn-outline" type="submit" value="Go to the Shopping Cart"></i>
                     </form> 
                      <form action="FrontController" method="GET">
-                        <input type="hidden" name="command" value="ShowCatalog">
+                        <input type="hidden" name="command" value="ShowCatalogue">
                         <input class="btn btn-lg btn-outline" type="submit" value="Go to the Catalogue"></i>
                     </form> 
                     </a>

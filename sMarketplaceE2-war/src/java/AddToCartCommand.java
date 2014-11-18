@@ -1,4 +1,5 @@
-import ejb.CartBeans;
+import ejb.CartBean;
+import ejb.Catalogue;
 import ejb.ShoppingCart;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -10,16 +11,19 @@ import javax.ejb.EJB;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import model.ProductList;
+import ejb.CatalogueBean;
 
 public class AddToCartCommand extends FrontCommand {
     
     @EJB
     private ShoppingCart cart;
+    @EJB
+    private Catalogue catalogue;
 
     @Override
     public void process() {
         initCart();
+        initCatalogue();
         addToCart(request);
         RequestDispatcher dispatcher = context.getRequestDispatcher("/" +  
                 request.getParameter("Page") + 
@@ -32,12 +36,20 @@ public class AddToCartCommand extends FrontCommand {
     }
 
     private void addToCart(HttpServletRequest request) {
-      cart.addProduct(ProductList.getIntance().searchById(request.getParameter("ProductId")));
+      cart.addProduct(catalogue.searchById(request.getParameter("ProductId")));
     }
 
     private void initCart() {
         try {
-            cart = (ShoppingCart) new InitialContext().lookup("java:app/sMarketplaceE2-war/CartBeans");
+            cart = (ShoppingCart) new InitialContext().lookup("java:app/sMarketplaceE2-war/CartBean");
+        } catch (NamingException ex) {
+            Logger.getLogger(AddToCartCommand.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void initCatalogue() {
+        try {
+            catalogue = (Catalogue) new InitialContext().lookup("java:app/sMarketplaceE2-war/CatalogueBean");
         } catch (NamingException ex) {
             Logger.getLogger(AddToCartCommand.class.getName()).log(Level.SEVERE, null, ex);
         }

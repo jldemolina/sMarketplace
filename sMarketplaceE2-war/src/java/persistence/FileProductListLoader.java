@@ -1,5 +1,6 @@
 package persistence;
 
+import ejb.Catalogue;
 import model.Language;
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,14 +10,25 @@ import java.io.IOException;
 import model.Customer;
 import model.Image;
 import model.Product;
-import model.ProductList;
+import ejb.CatalogueBean;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.ejb.EJB;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 
 public class FileProductListLoader implements ProductListLoader {
     
     private final String file;
+    @EJB
+    private Catalogue catalogue;
 
     public FileProductListLoader(String file) {
         this.file = file;
+        try {
+            catalogue = (Catalogue) new InitialContext().lookup("java:app/sMarketplaceE2-war/CatalogueBean");
+        } catch (NamingException ex) {
+        }
     }
 
     @Override
@@ -35,12 +47,11 @@ public class FileProductListLoader implements ProductListLoader {
                             Language.PHP,
                             Double.valueOf(productStringData[5].trim()),  productStringData[6].trim(),
                             new Image(productStringData[7].trim()));
-                    ProductList.getIntance().add(script);
+                    catalogue.add(script);
                 }
             }
         } catch (FileNotFoundException ex) {
         } catch (IOException ex) {
         }
     }
-    
 }
