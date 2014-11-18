@@ -12,6 +12,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import ejb.CatalogueBean;
+import persistence.FileCartPercentageDiscountLoader;
 
 public class AddToCartCommand extends FrontCommand {
     
@@ -25,6 +26,8 @@ public class AddToCartCommand extends FrontCommand {
         initCart();
         initCatalogue();
         addToCart(request);
+        new FileCartPercentageDiscountLoader("V:/Proyectos/Espacio de trabajo personal/NetBeans/sMarketplace/Entrega 2/sMarketplace/data/cartPercentageDiscounts.txt").load();
+
         RequestDispatcher dispatcher = context.getRequestDispatcher("/" +  
                 request.getParameter("Page") + 
                 "View.jsp");
@@ -41,7 +44,7 @@ public class AddToCartCommand extends FrontCommand {
 
     private void initCart() {
         try {
-            cart = (ShoppingCart) new InitialContext().lookup("java:app/sMarketplaceE2-war/CartBean");
+            cart = (ShoppingCart) new InitialContext().lookup("java:global/sMarketplaceE2-war/CartBean");
         } catch (NamingException ex) {
             Logger.getLogger(AddToCartCommand.class.getName()).log(Level.SEVERE, null, ex);
         }

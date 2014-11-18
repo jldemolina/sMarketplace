@@ -1,17 +1,28 @@
 package ejb;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import javax.annotation.PostConstruct;
+import javax.ejb.Stateful;
 import javax.ejb.Stateless;
+import model.Discount;
 import model.Product;
-import model.User;
 
 @Stateless
 public class CartBean implements ShoppingCart, Serializable {
 
-    private HashMap<Product, Integer> cartProducts = new HashMap<>();
-
+    private HashMap<Product, Integer> cartProducts;
+    private ArrayList<Discount> discounts;
+    
+    @Override
+    @PostConstruct
+    public void initialize() {
+        cartProducts = new HashMap<>();
+        discounts = new ArrayList<>();
+    }
+    
     @Override
     public void addProduct(Product product) {
         for (Map.Entry<Product, Integer> entry : cartProducts.entrySet()) {
@@ -56,6 +67,16 @@ public class CartBean implements ShoppingCart, Serializable {
         }
         return total;
     }
+    
+    @Override
+    public double getProductsPriceWithDiscount() {
+        double total = 0;
+        for (Map.Entry<Product, Integer> entry : cartProducts.entrySet()) {
+            total += entry.getKey().getPriceWithDiscount() * entry.getValue();
+        }
+        return total;
+    }
+
 
     @Override
     public int getTotalItems() {
@@ -66,4 +87,23 @@ public class CartBean implements ShoppingCart, Serializable {
         return total;
     }
 
+    @Override
+    public double getPriceWithDiscount() {
+        double priceDiscounted = 0;
+        for (Discount discount : discounts)
+            priceDiscounted += getTotalPrice() * (discount.getDiscount() / 100);
+        double finalPrice = Math.floor((getProductsPriceWithDiscount() - priceDiscounted) * 1e2) / 1e2;
+        return (finalPrice < 0)? 0 : finalPrice;
+    }
+
+    @Override
+    public ArrayList<Discount> getDiscounts() {
+        return discounts;
+    }
+
+    @Override
+    public void setDiscounts(ArrayList<Discount> discounts) {
+        this.discounts = discounts;
+    }
+    
 }

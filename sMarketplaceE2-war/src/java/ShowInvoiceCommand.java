@@ -10,6 +10,8 @@ import javax.naming.NamingException;
 import model.Customer;
 import model.Invoice;
 import model.User;
+import persistence.FileProductListLoader;
+import persistence.FileProductPercentageDiscountLoader;
 
 public class ShowInvoiceCommand extends FrontCommand {
 
@@ -19,7 +21,7 @@ public class ShowInvoiceCommand extends FrontCommand {
             RequestDispatcher dispatcher = context.getRequestDispatcher("/invoiceView.jsp");
             User user = new Customer((String) request.getParameter("name"), (String) request.getParameter("email"));
             user.setPaymentMethod(request.getParameter("paymentMethod"));
-            Invoice invoice = new Invoice(user, ((ShoppingCart) new InitialContext().lookup("java:app/sMarketplaceE2-war/CartBean")).getProducts());
+            Invoice invoice = new Invoice(user, ((ShoppingCart) new InitialContext().lookup("java:app/sMarketplaceE2-war/CartBean")));
             request.getSession().setAttribute("Invoice", invoice);
             dispatcher.forward(request, response);
         } catch (ServletException | IOException ex) {

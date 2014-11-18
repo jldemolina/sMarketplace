@@ -70,16 +70,23 @@
                             <input type="hidden" name="ProductId" value=<% out.println(entry.getKey().getId()); %>>
                             <span class="addbtn"><input type="submit" class="btn btn-default"value="+"></span>
                         </form>
-                        <span class="price"> <% out.println(entry.getKey().getPrice() + "€"); %></span>
+                        <span class="price"> <% out.println(entry.getKey().getPrice() + "€");
+                                if (entry.getKey().getPriceWithDiscount() != entry.getKey().getPrice()) out.print(" > " + entry.getKey().getPriceWithDiscount() + "€"); %></span>
                     </li>
                     <% }%>
-                    <li class="row totals">
+                    <li>
                         <span class="itemName">Total:</span>
-                        <span class="price"> <% out.println(cart.getTotalPrice());%></span>
-                        <span class="order" data-toggle="modal" data-target="#myModal" > <a class="text-center">ORDER</a></span>
+                        <span class="price"> <% out.println(cart.getProductsPriceWithDiscount());%></span>
                     </li>
-
-
+                    <br><br>
+                    <li>
+                        <span class="itemName">Total with In-Cart discounts:</span>
+                        <span class="price"> <% out.println(cart.getPriceWithDiscount());%></span>
+                    </li>
+                    <br><br><br>
+                     <li>
+                         <div align="right"><span class="order" data-toggle="modal" data-target="#myModal" > <a class="text-center">ORDER</a></span></div>
+                     </li>
                 </ul>
             </div>
 

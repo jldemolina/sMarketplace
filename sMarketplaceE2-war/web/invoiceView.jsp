@@ -90,7 +90,7 @@
           </tr>
         </thead>
         <tbody>
-            <% for (Map.Entry<Product, Integer> entry : invoice.getProducts().entrySet()) { %>
+            <% for (Map.Entry<Product, Integer> entry : invoice.getCart().getProducts().entrySet()) { %>
             <tr>
                 <td>  <% out.print(entry.getKey().getName());  %> </td>
                 <td><a href="#">  <% out.print(entry.getKey().getDescription());  %> </a></td>
@@ -113,9 +113,9 @@
         </div>
         <div class="col-xs-2">
           <strong>
-          <% out.print(invoice.getTotal()); %> <br>
+          <% out.print(invoice.getCart().getTotalPrice()); %> <br>
           0% <br>
-          <% out.print(invoice.getTotal()); %> <br>
+          <% out.print(invoice.getCart().getPriceWithDiscount()); %> <br>
           </strong>
         </div>
       </div>

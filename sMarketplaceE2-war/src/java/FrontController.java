@@ -1,15 +1,26 @@
+import ejb.ShoppingCart;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.EJB;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import persistence.FileProductListLoader;
+import persistence.FileProductPercentageDiscountLoader;
 
 @WebServlet(urlPatterns = {"/FrontController"})
 public class FrontController extends HttpServlet {
-
+    
+    public FrontController() {
+        new FileProductListLoader("V:/Proyectos/Espacio de trabajo personal/NetBeans/sMarketplace/Entrega 2/sMarketplace/data/products.txt").load();
+        new FileProductPercentageDiscountLoader("V:/Proyectos/Espacio de trabajo personal/NetBeans/sMarketplace/Entrega 2/sMarketplace/data/productsPercentageDiscounts.txt").load();
+    }
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, InstantiationException {
         try {

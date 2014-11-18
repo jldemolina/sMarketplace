@@ -1,6 +1,6 @@
 package persistence;
 
-interface ProductListLoader {
+public interface Loader {
     
     public void load();
     

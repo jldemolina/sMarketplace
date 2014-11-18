@@ -1,31 +1,21 @@
 package model;
 
-import java.util.HashMap;
-import java.util.Map;
+import ejb.ShoppingCart;
 
 public class Invoice {
     private final User user;
-    private Map<Product, Integer> products;
+    private ShoppingCart cart;
 
-    public Invoice(User user, Map<Product, Integer> products) {
+    public Invoice(User user, ShoppingCart cart) {
         this.user = user;
-        this.products = products;
+        this.cart = cart;
     }
 
-    public Map<Product, Integer> getProducts() {
-        return products;
+    public ShoppingCart getCart() {
+        return cart;
     }
 
     public User getUser() {
         return user;
     }    
-    
-    public double getTotal() {
-        double total = 0;
-        for (Map.Entry<Product, Integer> entry : products.entrySet()) {
-            total += entry.getKey().getPrice() * entry.getValue();
-        }
-        return total;
-    } 
-
 }

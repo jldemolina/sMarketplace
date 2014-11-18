@@ -52,7 +52,8 @@
                                 <input type="hidden" name="ProductId" value=<% out.println(product.getId()); %>>
                                 <span class="itemName"> <% out.println(product.getName()); %> </span>
                                 <span class="addbtn"><input type="submit" class="btn btn-default"value="+"></span>
-                                <span class="price"> <% out.println(product.getPrice()); %> </span>
+                                <span class="price"> <% out.println(product.getPrice() + "€"); 
+                                                        if (product.getPriceWithDiscount() != product.getPrice()) out.print(" > " + product.getPriceWithDiscount() + "€"); %> </span>
                             </form> 
                         </li>
                         <% } %>
@@ -60,7 +61,7 @@
                         <form action="FrontController" method="GET">
                             <input type="hidden" name="command" value="ShowCart">
                             <br>
-                            <div align="right"> <span class="order"><button class="btn btn-primary">View cart (<% out.println(((ShoppingCart) new InitialContext().lookup("java:app/sMarketplaceE2-war/CartBean")).getTotalItems());%> items)</button> </span> </div>
+                            <div align="right"> <span class="order"><button class="btn btn-primary">View cart (<% out.println(((ShoppingCart) new InitialContext().lookup("java:global/sMarketplaceE2-war/CartBean")).getTotalItems());%> items)</button> </span> </div>
                             <br>
                         </form> 
                 </div>

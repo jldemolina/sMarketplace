@@ -1,8 +1,9 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
-public class Product implements Serializable {
+public class Product implements Serializable, Discountable {
     private final String id;
     private String name;
     private User author;
@@ -10,6 +11,7 @@ public class Product implements Serializable {
     private double price;
     private String description;
     private Image image;
+    private ArrayList<Discount> discounts;
 
     public Product(String id, String name, User author, Language language, double price, String description, Image image) {
         this.id = id;
@@ -19,6 +21,7 @@ public class Product implements Serializable {
         this.price = price;
         this.description = description;
         this.image = image;
+        this.discounts = new ArrayList<Discount>();;
     }
 
     public String getId() {
@@ -50,7 +53,7 @@ public class Product implements Serializable {
     }
 
     public double getPrice() {
-        return price;
+        return Math.floor(price * 1e2) / 1e2;
     }
 
     public void setPrice(double price) {
@@ -71,6 +74,25 @@ public class Product implements Serializable {
 
     public void setImage(Image image) {
         this.image = image;
+    }
+
+    @Override
+    public double getPriceWithDiscount() {
+        double priceDiscounted = 0;
+        for (Discount discount : discounts)
+            priceDiscounted += discount.getPriceDiscounted();
+        double finalPrice = Math.floor((price - priceDiscounted)* 1e2) / 1e2;
+        return (finalPrice < 0)? 0 : finalPrice;
+    }
+
+    @Override
+    public ArrayList<Discount> getDiscounts() {
+        return discounts;
+    }
+
+    @Override
+    public void setDiscounts(ArrayList<Discount> discounts) {
+        this.discounts = discounts;
     }
    
 }
