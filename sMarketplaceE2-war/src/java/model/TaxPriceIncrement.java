@@ -10,6 +10,10 @@ public class TaxPriceIncrement implements PriceIncrement {
         this.increment = 0;
     }
 
+    public TaxPriceIncrement(double increment) {
+        this.increment = increment;
+    }
+    
     @Override
     public double getIncrement() {
         return increment;

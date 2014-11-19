@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.PostConstruct;
-import javax.ejb.Stateful;
 import javax.ejb.Stateless;
 import model.Discount;
 import model.PriceIncrement;
@@ -23,6 +22,7 @@ public class CartBean implements ShoppingCart, Serializable {
     public void initialize() {
         cartProducts = new HashMap<>();
         discounts = new ArrayList<>();
+        increments = new ArrayList<>();
     }
     
     @Override
@@ -115,7 +115,7 @@ public class CartBean implements ShoppingCart, Serializable {
         for (PriceIncrement increment : increments) {
             priceIncremented += increment.getPriceIncremented(this);
         }
-        return Math.floor((getProductsPriceWithDiscount() - priceIncremented) * 1e2) / 1e2;
+        return Math.floor((getProductsPriceWithDiscount() + priceIncremented) * 1e2) / 1e2;
     }
 
     @Override
@@ -124,8 +124,23 @@ public class CartBean implements ShoppingCart, Serializable {
     }
 
     @Override
-    public void setPriceIncrementss(ArrayList<PriceIncrement> increments) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setPriceIncrements(ArrayList<PriceIncrement> increments) {
+        this.increments = increments;
+    }
+
+    @Override
+    public double getPriceDiscounted() {
+        return getTotalPrice() - getProductsPriceWithDiscount();
+    }
+
+    @Override
+    public double getPriceIncremented() {
+        double priceIncremented = 0;
+        
+        for (PriceIncrement increment : increments) {
+            priceIncremented += increment.getPriceIncremented(this);
+        }
+        return Math.floor((priceIncremented) * 1e2) / 1e2;
     }
     
 }

@@ -18,6 +18,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import model.Discount;
 import model.PercentageDiscount;
+import model.TaxPriceIncrement;
 
 public class FileProductPercentageDiscountLoader implements Loader {
     
@@ -40,6 +41,7 @@ public class FileProductPercentageDiscountLoader implements Loader {
                     String[] productStringData = line.split("<>");
                     Product product = catalogue.searchByName(productStringData[0]);
                     if (product != null) {
+                        clear(product);
                         product.getDiscounts().add(new PercentageDiscount(Double.valueOf(productStringData[1].trim())));
                     }
                 }
@@ -47,6 +49,12 @@ public class FileProductPercentageDiscountLoader implements Loader {
         } catch (FileNotFoundException ex) {
         } catch (IOException ex) {
         }
+    }
+    
+    private void clear(Product product) {
+        for (int i = 0; i <  product.getDiscounts().size(); i++)
+            if (product.getDiscounts().get(i) instanceof PercentageDiscount)
+                product.getDiscounts().remove(i);
     }
 }
 

@@ -10,6 +10,10 @@ public class Customer extends User {
         super(username, email);
     }
 
+    public Customer(String username, String email, String ubication, String paymentMethod) {
+        super(username, email, ubication, paymentMethod);
+    }
+    
     public Customer(CartBean shoppingCart, String username, String email) {
         super(username, email);
         this.shoppingCart = shoppingCart;

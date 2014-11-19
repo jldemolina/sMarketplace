@@ -1,11 +1,12 @@
 package ejb;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import javax.ejb.Stateless;
 import model.Product;
 
 @Stateless
-public class CatalogueBean implements Catalogue {
+public class CatalogueBean implements Catalogue, Serializable {
 
     private final ArrayList<Product> products;
     

@@ -4,12 +4,6 @@
 <%@page import="javax.naming.Context"%>
 <%@page import="ejb.ShoppingCart"%>
 <%@page import="javax.naming.InitialContext"%>
-<%-- 
-    Document   : cart
-    Created on : 11-oct-2014, 13:56:50
-    Author     : Seruk
---%>
-
 <%@page import="model.User"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>

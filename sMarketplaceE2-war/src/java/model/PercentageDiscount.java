@@ -7,6 +7,7 @@ public class PercentageDiscount implements Discount {
     private double discount;
 
     public PercentageDiscount() {
+        this.discount = 0;
     }
 
     public PercentageDiscount(double discount) {

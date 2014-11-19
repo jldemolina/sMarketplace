@@ -21,7 +21,7 @@ public class FileCartPercentageDiscountLoader implements Loader {
     @Override
     public void load() {
         try (BufferedReader reader = new BufferedReader(new FileReader(new File(file)))) {
-            cart.getDiscounts().clear();
+            clear();
             while (true) {
                 String line = reader.readLine();
                 if (line == null) {
@@ -35,5 +35,11 @@ public class FileCartPercentageDiscountLoader implements Loader {
         } catch (FileNotFoundException ex) {
         } catch (IOException ex) {
         }
+    }
+    
+    private void clear() {
+        for (int i = 0; i <  cart.getDiscounts().size(); i++)
+            if (cart.getDiscounts().get(i) instanceof PercentageDiscount)
+                cart.getDiscounts().remove(i);
     }
 }

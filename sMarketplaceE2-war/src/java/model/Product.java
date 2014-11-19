@@ -94,5 +94,14 @@ public class Product implements Serializable, Discountable {
     public void setDiscounts(ArrayList<Discount> discounts) {
         this.discounts = discounts;
     }
+
+    @Override
+    public double getPriceDiscounted() {
+        double priceDiscounted = 0;
+        for (Discount discount : discounts) {
+            priceDiscounted += discount.getPriceDiscounted(this);
+        }
+        return Math.floor((priceDiscounted) * 1e2) / 1e2;
+    }
    
 }
