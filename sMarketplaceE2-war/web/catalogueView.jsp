@@ -43,7 +43,7 @@
                             <span>AVAILABLE ITEMS</span>
                         </li>
                         <%
-                            for (Product product : ((Catalogue) new InitialContext().lookup("java:app/sMarketplaceE2-war/CatalogueBean")).getProducts()) {
+                            for (Product product : ((Catalogue) new InitialContext().lookup("java:app/sMarketplaceE2-ejb/CatalogueBean")).getProducts()) {
                         %> 
                         <li class="row">
                             <form action="FrontController" method="GET">
@@ -61,7 +61,7 @@
                         <form action="FrontController" method="GET">
                             <input type="hidden" name="command" value="ShowCart">
                             <br>
-                            <div align="right"> <span class="order"><button class="btn btn-primary">View cart (<% out.println(((ShoppingCart) new InitialContext().lookup("java:global/sMarketplaceE2-war/CartBean")).getTotalItems());%> items)</button> </span> </div>
+                            <div align="right"> <span class="order"><button class="btn btn-primary">View cart (<% out.println(((ShoppingCart) new InitialContext().lookup("java:app/sMarketplaceE2-ejb/CartBean")).getTotalItems());%> items)</button> </span> </div>
                             <br>
                         </form> 
                 </div>

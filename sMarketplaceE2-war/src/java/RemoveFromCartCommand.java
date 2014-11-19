@@ -40,7 +40,7 @@ public class RemoveFromCartCommand extends FrontCommand {
 
     private void initCart() {
         try {
-            cart = (ShoppingCart) new InitialContext().lookup("java:app/sMarketplaceE2-war/CartBean");
+            cart = (ShoppingCart) new InitialContext().lookup("java:app/sMarketplaceE2-ejb/CartBean");
         } catch (NamingException ex) {
             Logger.getLogger(AddToCartCommand.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -48,7 +48,7 @@ public class RemoveFromCartCommand extends FrontCommand {
     
     private void initCatalogue() {
         try {
-            catalogue = (Catalogue) new InitialContext().lookup("java:app/sMarketplaceE2-war/CatalogueBean");
+            catalogue = (Catalogue) new InitialContext().lookup("java:app/sMarketplaceE2-ejb/CatalogueBean");
         } catch (NamingException ex) {
             Logger.getLogger(AddToCartCommand.class.getName()).log(Level.SEVERE, null, ex);
         }

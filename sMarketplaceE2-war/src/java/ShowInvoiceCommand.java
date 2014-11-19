@@ -20,9 +20,9 @@ public class ShowInvoiceCommand extends FrontCommand {
             
             User user = new Customer((String) request.getParameter("name"), (String) request.getParameter("email"), (String) request.getParameter("ubication"), (String) request.getParameter("paymentMethod"));
             
-            new FileProductTaxPriceIncrementLoader("V:/Proyectos/Espacio de trabajo personal/NetBeans/sMarketplace/Entrega 2/sMarketplace/data/taxCartIncrements.txt", (ShoppingCart) new InitialContext().lookup("java:app/sMarketplaceE2-war/CartBean"), (String) request.getParameter("ubication")).load();
+            new FileProductTaxPriceIncrementLoader("V:/Proyectos/Espacio de trabajo personal/NetBeans/sMarketplace/Entrega 2/sMarketplace/data/taxCartIncrements.txt", (ShoppingCart) new InitialContext().lookup("java:app/sMarketplaceE2-ejb/CartBean"), (String) request.getParameter("ubication")).load();
 
-            Invoice invoice = new Invoice(user, ((ShoppingCart) new InitialContext().lookup("java:app/sMarketplaceE2-war/CartBean")));
+            Invoice invoice = new Invoice(user, ((ShoppingCart) new InitialContext().lookup("java:app/sMarketplaceE2-ejb/CartBean")));
             request.getSession().setAttribute("Invoice", invoice);
             dispatcher.forward(request, response);
         } catch (ServletException | IOException ex) {

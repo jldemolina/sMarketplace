@@ -48,7 +48,7 @@
                     </li>
 
                     <%  
-                        ShoppingCart cart = (ShoppingCart) new InitialContext().lookup("java:app/sMarketplaceE2-war/CartBean");
+                        ShoppingCart cart = (ShoppingCart) new InitialContext().lookup("java:app/sMarketplaceE2-ejb/CartBean");
                         for (Map.Entry<Product, Integer> entry : cart.getProducts().entrySet()) { %>
                     <li class="row">
                         <span class="quantity"> <% out.println(entry.getValue()); %></span>

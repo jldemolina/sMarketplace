@@ -26,7 +26,7 @@ public class FileProductListLoader implements Loader {
     public FileProductListLoader(String file) {
         this.file = file;
         try {
-            catalogue = (Catalogue) new InitialContext().lookup("java:app/sMarketplaceE2-war/CatalogueBean");
+            catalogue = (Catalogue) new InitialContext().lookup("java:app/sMarketplaceE2-ejb/CatalogueBean");
         } catch (NamingException ex) {
         }
     }
