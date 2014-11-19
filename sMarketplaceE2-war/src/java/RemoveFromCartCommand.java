@@ -24,7 +24,7 @@ public class RemoveFromCartCommand extends FrontCommand {
         initCart();
         initCatalogue();
         deleteFromCart(request);
-        new FileCartPercentageDiscountLoader("V:/Proyectos/Espacio de trabajo personal/NetBeans/sMarketplace/Entrega 2/sMarketplace/data/cartPercentageDiscounts.txt").load();
+        new FileCartPercentageDiscountLoader("V:/Proyectos/Espacio de trabajo personal/NetBeans/sMarketplace/Entrega 2/sMarketplace/data/cartPercentageDiscounts.txt", cart).load();
 
         RequestDispatcher dispatcher = context.getRequestDispatcher("/cartView.jsp");
         try {

@@ -1,3 +1,4 @@
+import ejb.Catalogue;
 import ejb.ShoppingCart;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -16,9 +17,13 @@ import persistence.FileProductPercentageDiscountLoader;
 @WebServlet(urlPatterns = {"/FrontController"})
 public class FrontController extends HttpServlet {
     
+    @EJB
+    private Catalogue catalogue;
+    
     public FrontController() {
+        initCatalogue();
         new FileProductListLoader("V:/Proyectos/Espacio de trabajo personal/NetBeans/sMarketplace/Entrega 2/sMarketplace/data/products.txt").load();
-        new FileProductPercentageDiscountLoader("V:/Proyectos/Espacio de trabajo personal/NetBeans/sMarketplace/Entrega 2/sMarketplace/data/productsPercentageDiscounts.txt").load();
+        new FileProductPercentageDiscountLoader("V:/Proyectos/Espacio de trabajo personal/NetBeans/sMarketplace/Entrega 2/sMarketplace/data/productsPercentageDiscounts.txt", catalogue).load();
     }
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -60,5 +65,14 @@ public class FrontController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }
+    
+    private void initCatalogue() {
+        try {
+            catalogue = (Catalogue) new InitialContext().lookup("java:app/sMarketplaceE2-war/CatalogueBean");
+        } catch (NamingException ex) {
+            Logger.getLogger(AddToCartCommand.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     
 }

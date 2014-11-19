@@ -8,6 +8,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.Stateful;
 import javax.ejb.Stateless;
 import model.Discount;
+import model.PriceIncrement;
 import model.Product;
 
 @Stateless
@@ -15,6 +16,7 @@ public class CartBean implements ShoppingCart, Serializable {
 
     private HashMap<Product, Integer> cartProducts;
     private ArrayList<Discount> discounts;
+    private ArrayList<PriceIncrement> increments;
     
     @Override
     @PostConstruct
@@ -90,8 +92,9 @@ public class CartBean implements ShoppingCart, Serializable {
     @Override
     public double getPriceWithDiscount() {
         double priceDiscounted = 0;
-        for (Discount discount : discounts)
-            priceDiscounted += getTotalPrice() * (discount.getDiscount() / 100);
+        for (Discount discount : discounts) {
+            priceDiscounted += discount.getPriceDiscounted(this);
+        }
         double finalPrice = Math.floor((getProductsPriceWithDiscount() - priceDiscounted) * 1e2) / 1e2;
         return (finalPrice < 0)? 0 : finalPrice;
     }
@@ -104,6 +107,25 @@ public class CartBean implements ShoppingCart, Serializable {
     @Override
     public void setDiscounts(ArrayList<Discount> discounts) {
         this.discounts = discounts;
+    }
+
+    @Override
+    public double getPriceWithIncrements() {
+        double priceIncremented = 0;
+        for (PriceIncrement increment : increments) {
+            priceIncremented += increment.getPriceIncremented(this);
+        }
+        return Math.floor((getProductsPriceWithDiscount() - priceIncremented) * 1e2) / 1e2;
+    }
+
+    @Override
+    public ArrayList<PriceIncrement> getPriceIncrements() {
+        return increments;
+    }
+
+    @Override
+    public void setPriceIncrementss(ArrayList<PriceIncrement> increments) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

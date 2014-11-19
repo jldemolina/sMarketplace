@@ -3,11 +3,12 @@ package ejb;
 import java.util.Map;
 import javax.ejb.Local;
 import javax.ejb.Remote;
+import model.Adherable;
 import model.Discountable;
 import model.Product;
 
 @Local
-public interface ShoppingCart extends Discountable {
+public interface ShoppingCart extends Discountable, Adherable {
 
     public void initialize();
     public void addProduct(Product product); 

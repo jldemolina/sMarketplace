@@ -22,15 +22,11 @@ import model.PercentageDiscount;
 public class FileProductPercentageDiscountLoader implements Loader {
     
     private final String file;
-    @EJB
-    private Catalogue catalogue;
+    private final Catalogue catalogue;
 
-    public FileProductPercentageDiscountLoader(String file) {
+    public FileProductPercentageDiscountLoader(String file, Catalogue catalogue) {
         this.file = file;
-        try {
-            catalogue = (Catalogue) new InitialContext().lookup("java:app/sMarketplaceE2-war/CatalogueBean");
-        } catch (NamingException ex) {
-        }
+        this.catalogue = catalogue;
     }
 
     @Override
@@ -44,7 +40,7 @@ public class FileProductPercentageDiscountLoader implements Loader {
                     String[] productStringData = line.split("<>");
                     Product product = catalogue.searchByName(productStringData[0]);
                     if (product != null) {
-                        product.getDiscounts().add(new PercentageDiscount(product, Double.valueOf(productStringData[1].trim())));
+                        product.getDiscounts().add(new PercentageDiscount(Double.valueOf(productStringData[1].trim())));
                     }
                 }
             }

@@ -80,7 +80,7 @@ public class Product implements Serializable, Discountable {
     public double getPriceWithDiscount() {
         double priceDiscounted = 0;
         for (Discount discount : discounts)
-            priceDiscounted += discount.getPriceDiscounted();
+            priceDiscounted += discount.getPriceDiscounted(this);
         double finalPrice = Math.floor((price - priceDiscounted)* 1e2) / 1e2;
         return (finalPrice < 0)? 0 : finalPrice;
     }
