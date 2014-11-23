@@ -1,8 +1,8 @@
 
+<%@page import="ejb.CartBean"%>
 <%@page import="javax.ejb.EJB"%>
 <%@page import="javax.ejb.embeddable.EJBContainer"%>
 <%@page import="javax.naming.Context"%>
-<%@page import="ejb.ShoppingCart"%>
 <%@page import="javax.naming.InitialContext"%>
 <%@page import="model.User"%>
 <%@page import="java.util.HashMap"%>
@@ -48,7 +48,7 @@
                     </li>
 
                     <%  
-                        ShoppingCart cart = (ShoppingCart) new InitialContext().lookup("java:app/sMarketplaceE2-ejb/CartBean");
+                        CartBean cart = (CartBean) request.getSession().getAttribute("Cart");
                         for (Map.Entry<Product, Integer> entry : cart.getProducts().entrySet()) { %>
                     <li class="row">
                         <span class="quantity"> <% out.println(entry.getValue()); %></span>

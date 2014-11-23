@@ -39,11 +39,7 @@ public class RemoveFromCartCommand extends FrontCommand {
     }
 
     private void initCart() {
-        try {
-            cart = (ShoppingCart) new InitialContext().lookup("java:app/sMarketplaceE2-ejb/CartBean");
-        } catch (NamingException ex) {
-            Logger.getLogger(AddToCartCommand.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        cart = (CartBean) request.getSession().getAttribute("Cart");
     }
     
     private void initCatalogue() {

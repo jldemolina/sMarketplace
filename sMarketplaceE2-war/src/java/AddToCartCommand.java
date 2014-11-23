@@ -15,7 +15,7 @@ import ejb.CatalogueBean;
 import persistence.FileCartPercentageDiscountLoader;
 
 public class AddToCartCommand extends FrontCommand {
-    
+
     @EJB
     private ShoppingCart cart;
     @EJB
@@ -25,12 +25,12 @@ public class AddToCartCommand extends FrontCommand {
     public void process() {
         initCart();
         initCatalogue();
-        addToCart(request);
+        addToCart();
         new FileCartPercentageDiscountLoader("V:/Proyectos/Espacio de trabajo personal/NetBeans/sMarketplace/Entrega 2/sMarketplace/data/cartPercentageDiscounts.txt", cart).load();
 
-        RequestDispatcher dispatcher = context.getRequestDispatcher("/" +  
-                request.getParameter("Page") + 
-                "View.jsp");
+        RequestDispatcher dispatcher = context.getRequestDispatcher("/"
+                + request.getParameter("Page")
+                + "View.jsp");
         try {
             dispatcher.forward(request, response);
         } catch (ServletException | IOException ex) {
@@ -38,18 +38,14 @@ public class AddToCartCommand extends FrontCommand {
         }
     }
 
-    private void addToCart(HttpServletRequest request) {
-      cart.addProduct(catalogue.searchById(request.getParameter("ProductId")));
+    private void addToCart() {
+        cart.addProduct(catalogue.searchById(request.getParameter("ProductId")));
     }
 
     private void initCart() {
-        try {
-            cart = (ShoppingCart) new InitialContext().lookup("java:app/sMarketplaceE2-ejb/CartBean");
-        } catch (NamingException ex) {
-            Logger.getLogger(AddToCartCommand.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        cart = (CartBean) request.getSession().getAttribute("Cart");
     }
-    
+
     private void initCatalogue() {
         try {
             catalogue = (Catalogue) new InitialContext().lookup("java:app/sMarketplaceE2-ejb/CatalogueBean");

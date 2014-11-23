@@ -5,20 +5,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.PostConstruct;
-import javax.ejb.Stateless;
+import javax.ejb.Stateful;
 import model.Discount;
 import model.PriceIncrement;
 import model.Product;
 
-@Stateless
-public class CartBean implements ShoppingCart, Serializable {
+@Stateful
+public class CartBean implements ShoppingCart {
 
     private HashMap<Product, Integer> cartProducts;
     private ArrayList<Discount> discounts;
     private ArrayList<PriceIncrement> increments;
     
     @Override
-    @PostConstruct
     public void initialize() {
         cartProducts = new HashMap<>();
         discounts = new ArrayList<>();

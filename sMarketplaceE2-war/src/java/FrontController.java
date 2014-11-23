@@ -1,3 +1,4 @@
+import ejb.CartBean;
 import ejb.Catalogue;
 import ejb.ShoppingCart;
 import java.io.IOException;
@@ -29,6 +30,7 @@ public class FrontController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, InstantiationException {
         try {
+            initCart(request);
             FrontCommand command = (FrontCommand) Class.forName(request.getParameter("command") + "Command").newInstance();
             command.initialize(getServletContext(), request, response);
             command.process();
@@ -71,6 +73,14 @@ public class FrontController extends HttpServlet {
             catalogue = (Catalogue) new InitialContext().lookup("java:app/sMarketplaceE2-ejb/CatalogueBean");
         } catch (NamingException ex) {
             Logger.getLogger(AddToCartCommand.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void initCart(HttpServletRequest request) {
+        if (request.getSession().getAttribute("Cart") == null) {
+            CartBean cart = new CartBean();
+            cart.initialize();
+            request.getSession().setAttribute("Cart", cart);
         }
     }
 
