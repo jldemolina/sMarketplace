@@ -1,6 +1,6 @@
 package persistence;
 
-import objects.Product;
+import model.Script;
 import ejb.Catalogue;
 import model.Language;
 import java.io.BufferedReader;
@@ -38,16 +38,16 @@ public class FileProductListLoader implements Loader {
     public void load() {
         if (firstLine < 0 || lastLine < 0) return;
         catalogue.getProducts().clear();
-        ArrayList<Product> products = readLines();
+        ArrayList<Script> products = readLines();
         for (int i = firstLine; i < lastLine; i++) {
             if (i >= products.size()) return;
             catalogue.add(products.get(i));
         }
     }
 
-    private ArrayList<Product> readLines() {
-        Product script = null;
-        ArrayList<Product> products = new ArrayList();
+    private ArrayList<Script> readLines() {
+        Script script = null;
+        ArrayList<Script> products = new ArrayList();
         try {
             try (BufferedReader reader = new BufferedReader(new FileReader(new File(file)))) {
                 while (true) {
@@ -56,7 +56,7 @@ public class FileProductListLoader implements Loader {
                         break;
                     }
                     String[] productStringData = line.split("<>");
-                    script = new Product(productStringData[0].trim(),
+                    script = new Script(productStringData[0].trim(),
                             productStringData[1].trim(),
                             new Customer(productStringData[2].trim(), productStringData[3].trim()),
                             Language.PHP,

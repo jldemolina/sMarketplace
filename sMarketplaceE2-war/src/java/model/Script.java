@@ -1,4 +1,4 @@
-package objects;
+package model;
 
 
 
@@ -10,7 +10,7 @@ import model.Image;
 import model.Language;
 import model.User;
 
-public class Product implements model.Product {
+public class Script implements model.Product {
     private final String id;
     private String name;
     private User author;
@@ -20,7 +20,7 @@ public class Product implements model.Product {
     private Image image;
     private ArrayList<Discount> discounts;
 
-    public Product(String id, String name, User author, Language language, double price, String description, Image image) {
+    public Script(String id, String name, User author, Language language, double price, String description, Image image) {
         this.id = id;
         this.name = name;
         this.author = author;
