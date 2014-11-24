@@ -1,5 +1,6 @@
 package persistence;
 
+import objects.Product;
 import ejb.Catalogue;
 import model.Language;
 import java.io.BufferedReader;
@@ -9,7 +10,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import model.Customer;
 import model.Image;
-import model.Product;
 import ejb.CatalogueBean;
 import java.util.ArrayList;
 import java.util.logging.Level;
