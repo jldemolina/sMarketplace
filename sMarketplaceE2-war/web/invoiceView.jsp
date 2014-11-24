@@ -1,9 +1,3 @@
-<%-- 
-    Document   : invoiceView
-    Created on : 15-nov-2014, 0:09:30
-    Author     : Seruk
---%>
-
 <%@page import="model.Customer"%>
 <%@page import="ejb.CartBean"%>
 <%@page import="java.util.Map"%>

@@ -6,7 +6,7 @@ import javax.ejb.Stateless;
 import model.Product;
 
 @Stateless
-public class CatalogueBean implements Catalogue, Serializable {
+public class CatalogueBean implements Catalogue {
 
     private final ArrayList<Product> products;
     
