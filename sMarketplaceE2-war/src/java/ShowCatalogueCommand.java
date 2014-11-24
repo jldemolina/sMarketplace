@@ -58,7 +58,7 @@ public class ShowCatalogueCommand extends FrontCommand {
         }
     }
 
-    private boolean canToBeUpdated() {
+    private boolean canToBeIncreased() {
         Catalogue checkerCatalogue = new CatalogueBean();
         new FileProductListLoader("V:/Proyectos/Espacio de trabajo personal/NetBeans/sMarketplace/Entrega 2/sMarketplace/data/products.txt",
                 (Integer) request.getSession().getAttribute("firstItemNumber") + 5,
@@ -70,8 +70,20 @@ public class ShowCatalogueCommand extends FrontCommand {
         return false;
     }
 
+    private boolean canToBeDecreased() {
+        Catalogue checkerCatalogue = new CatalogueBean();
+        new FileProductListLoader("V:/Proyectos/Espacio de trabajo personal/NetBeans/sMarketplace/Entrega 2/sMarketplace/data/products.txt",
+                (Integer) request.getSession().getAttribute("firstItemNumber") - 5,
+                (Integer) request.getSession().getAttribute("lastItemNumber") - 5,
+                checkerCatalogue).load();
+        if (checkerCatalogue.getProducts().size() > 0) {
+            return true;
+        }
+        return false;
+    }
+        
     private void increasePage() {
-        if (!canToBeUpdated()) {
+        if (!canToBeIncreased()) {
             return;
         }
         request.getSession().setAttribute("firstItemNumber", (Integer) request.getSession().getAttribute("firstItemNumber") + 5);
@@ -79,7 +91,7 @@ public class ShowCatalogueCommand extends FrontCommand {
     }
 
     private void decreasePage() {
-        if (!canToBeUpdated()) {
+        if (!canToBeDecreased()) {
             return;
         }
         request.getSession().setAttribute("firstItemNumber", (Integer) request.getSession().getAttribute("firstItemNumber") - 5);

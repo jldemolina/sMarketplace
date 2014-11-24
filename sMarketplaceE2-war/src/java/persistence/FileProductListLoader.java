@@ -22,7 +22,7 @@ public class FileProductListLoader implements Loader {
 
     private final String file;
     
-    private Catalogue catalogue;
+    private final Catalogue catalogue;
     
     private final int firstLine;
     private final int lastLine;
@@ -36,6 +36,7 @@ public class FileProductListLoader implements Loader {
 
     @Override
     public void load() {
+        if (firstLine < 0 || lastLine < 0) return;
         catalogue.getProducts().clear();
         ArrayList<Product> products = readLines();
         for (int i = firstLine; i < lastLine; i++) {
