@@ -11,6 +11,7 @@ import model.Customer;
 import model.Image;
 import model.Product;
 import ejb.CatalogueBean;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
@@ -18,40 +19,54 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 public class FileProductListLoader implements Loader {
-    
-    private final String file;
-    @EJB
-    private Catalogue catalogue;
 
-    public FileProductListLoader(String file) {
+    private final String file;
+    
+    private Catalogue catalogue;
+    
+    private final int firstLine;
+    private final int lastLine;
+
+    public FileProductListLoader(String file, int firstLine, int lastLine, Catalogue catalogue) {
         this.file = file;
-        try {
-            catalogue = (Catalogue) new InitialContext().lookup("java:app/sMarketplaceE2-ejb/CatalogueBean");
-        } catch (NamingException ex) {
-        }
+        this.firstLine = firstLine;
+        this.lastLine = lastLine;
+        this.catalogue = catalogue;
     }
 
     @Override
     public void load() {
+        catalogue.getProducts().clear();
+        ArrayList<Product> products = readLines();
+        for (int i = firstLine; i < lastLine; i++) {
+            if (i >= products.size()) return;
+            catalogue.add(products.get(i));
+        }
+    }
+
+    private ArrayList<Product> readLines() {
         Product script = null;
+        ArrayList<Product> products = new ArrayList();
         try {
             try (BufferedReader reader = new BufferedReader(new FileReader(new File(file)))) {
                 while (true) {
                     String line = reader.readLine();
-                    if (line == null)
+                    if (line == null) {
                         break;
+                    }
                     String[] productStringData = line.split("<>");
-                    script = new Product(productStringData[0].trim(), 
+                    script = new Product(productStringData[0].trim(),
                             productStringData[1].trim(),
                             new Customer(productStringData[2].trim(), productStringData[3].trim()),
                             Language.PHP,
-                            Double.valueOf(productStringData[5].trim()),  productStringData[6].trim(),
+                            Double.valueOf(productStringData[5].trim()), productStringData[6].trim(),
                             new Image(productStringData[7].trim()));
-                    catalogue.add(script);
+                    products.add(script);
                 }
             }
         } catch (FileNotFoundException ex) {
         } catch (IOException ex) {
         }
+        return products;
     }
 }
